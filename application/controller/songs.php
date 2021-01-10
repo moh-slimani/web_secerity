@@ -12,6 +12,16 @@
 class Songs extends Controller
 {
     /**
+     * Songs constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->loadModel('song');
+    }
+
+
+    /**
      * PAGE: index
      * This method handles what happens when you move to http://yourproject/songs/index
      */
@@ -21,7 +31,7 @@ class Songs extends Controller
         $songs = $this->model->getAllSongs();
         $amount_of_songs = $this->model->getAmountOfSongs();
 
-       // load views. within the views we can echo out $songs and $amount_of_songs easily
+        // load views. within the views we can echo out $songs and $amount_of_songs easily
         require APP . 'view/_templates/header.php';
         require APP . 'view/songs/index.php';
         require APP . 'view/_templates/footer.php';
@@ -40,7 +50,7 @@ class Songs extends Controller
         // if we have POST data to create a new song entry
         if (isset($_POST["submit_add_song"])) {
             // do addSong() in model/model.php
-            $this->model->addSong($_POST["artist"], $_POST["track"],  $_POST["link"]);
+            $this->model->addSong($_POST["artist"], $_POST["track"], $_POST["link"]);
         }
 
         // where to go after song has been added
@@ -68,7 +78,7 @@ class Songs extends Controller
         header('location: ' . URL . 'songs/index');
     }
 
-     /**
+    /**
      * ACTION: editSong
      * This method handles what happens when you move to http://yourproject/songs/editsong
      * @param int $song_id Id of the to-edit song
@@ -92,7 +102,7 @@ class Songs extends Controller
             header('location: ' . URL . 'songs/index');
         }
     }
-    
+
     /**
      * ACTION: updateSong
      * This method handles what happens when you move to http://yourproject/songs/updatesong
@@ -106,7 +116,7 @@ class Songs extends Controller
         // if we have POST data to create a new song entry
         if (isset($_POST["submit_update_song"])) {
             // do updateSong() from model/model.php
-            $this->model->updateSong($_POST["artist"], $_POST["track"],  $_POST["link"], $_POST['song_id']);
+            $this->model->updateSong($_POST["artist"], $_POST["track"], $_POST["link"], $_POST['song_id']);
         }
 
         // where to go after song has been added

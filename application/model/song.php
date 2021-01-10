@@ -2,13 +2,13 @@
 
 class Song extends Model
 {
+
     /**
      * Get all songs from database
      */
     public function getAllSongs()
     {
         $this->query("SELECT id, artist, track, link FROM " . DB_NAME . ".song");
-        $this->execute();
 
         return $this->resultSet();
     }
@@ -27,6 +27,8 @@ class Song extends Model
         $this->bind(':artist', $artist);
         $this->bind(':track', $track);
         $this->bind(':link', $link);
+
+        $this->execute();
 
         return $this->lastInsertId();
     }
@@ -78,6 +80,7 @@ class Song extends Model
     public function getAmountOfSongs()
     {
         $this->query("SELECT COUNT(id) AS amount_of_songs FROM " . DB_NAME . ".song");
-        return $this->single()->amount_of_songs;
+        $result = $this->single();
+        return $result->amount_of_songs;
     }
 }

@@ -1,18 +1,25 @@
 <?php
-abstract class Model{
+
+abstract class Model
+{
     protected $dbh;
     protected $stmt;
 
-    public function __construct(){
-        $this->dbh = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASS);
+    public function __construct()
+    {
+        $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ, PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING);
+        $this->dbh = new PDO(DB_TYPE . ':host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=' . DB_CHARSET, DB_USER, DB_PASS, $options);
+        // $this->dbh = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS, $options);
     }
 
-    public function query($query){
+    public function query($query)
+    {
         $this->stmt = $this->dbh->prepare($query);
     }
 
     //Binds the prep statement
-    public function bind($param, $value, $type = null){
+    public function bind($param, $value, $type = null)
+    {
         if (is_null($type)) {
             switch (true) {
                 case is_int($value):
@@ -31,21 +38,25 @@ abstract class Model{
         $this->stmt->bindValue($param, $value, $type);
     }
 
-    public function execute(){
+    public function execute()
+    {
         $this->stmt->execute();
     }
 
-    public function resultSet(){
+    public function resultSet()
+    {
         $this->execute();
-        return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->stmt->fetchAll();
     }
 
-    public function lastInsertId(){
+    public function lastInsertId()
+    {
         return $this->dbh->lastInsertId();
     }
 
-    public function single(){
+    public function single()
+    {
         $this->execute();
-        return $this->stmt->fetch(PDO::FETCH_ASSOC);
+        return $this->stmt->fetch();
     }
 }
