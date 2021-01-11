@@ -34,6 +34,8 @@ require APP . 'libs/helper.php';
 require APP . 'core/application.php';
 require APP . 'core/controller.php';
 require APP . 'core/model.php';
+require APP . 'core/messages.php';
 
+session_start();
 // start the application
 $app = new Application();

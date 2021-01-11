@@ -11,6 +11,15 @@
 class Home extends Controller
 {
     /**
+     * Songs constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->middleware();
+    }
+
+    /**
      * PAGE: index
      * This method handles what happens when you move to http://yourproject/home/index (which is the default page btw)
      */
