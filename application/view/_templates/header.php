@@ -36,15 +36,15 @@
                 <!-- Nav items -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="examples/dashboard.html">
+                        <a class="nav-link active" href="<?php echo URL?>">
                             <i class="ni ni-tv-2 text-primary"></i>
                             <span class="nav-link-text">Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="examples/icons.html">
-                            <i class="ni ni-planet text-orange"></i>
-                            <span class="nav-link-text">Icons</span>
+                        <a class="nav-link" href="<?php echo URL?>patients">
+                            <i class="fas fa-user-injured text-orange"></i>
+                            <span class="nav-link-text">Patients</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -346,15 +346,17 @@
                            aria-expanded="false">
                             <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="<?php echo URL; ?>img/theme/team-4.jpg">
+                    <img alt="Image placeholder" src="<?php echo URL; ?>img/theme/team-1.jpg">
                   </span>
                                 <div class="media-body  ml-2  d-none d-lg-block">
-                                    <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
+                                    <span class="mb-0 text-sm  font-weight-bold">
+                                        <?php echo $_SESSION['user_data']['name']?>
+                                    </span>
                                 </div>
                             </div>
                         </a>
                         <div class="dropdown-menu  dropdown-menu-right ">
-                            <div class="dropdown-header noti-title">
+                            <!--<div class="dropdown-header noti-title">
                                 <h6 class="text-overflow m-0">Welcome!</h6>
                             </div>
                             <a href="#!" class="dropdown-item">
@@ -373,7 +375,7 @@
                                 <i class="ni ni-support-16"></i>
                                 <span>Support</span>
                             </a>
-                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-divider"></div>-->
                             <a href="<?php echo URL; ?>users/logout" class="dropdown-item">
                                 <i class="ni ni-user-run"></i>
                                 <span>Logout</span>

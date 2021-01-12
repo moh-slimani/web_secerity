@@ -49,9 +49,14 @@ abstract class Model
         return $this->stmt->fetchAll();
     }
 
-    public function lastInsertId()
+    public function lastInsertId(): string
     {
         return $this->dbh->lastInsertId();
+    }
+
+    public function errorInfo(): array
+    {
+        return $this->dbh->errorInfo();
     }
 
     public function single()

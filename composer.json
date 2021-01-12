@@ -20,7 +20,7 @@
     "source": "https://github.com/moh-slimani/web_secerity"
   },
   "require": {
-    "php": ">=5.3.0",
+    "php": ">=7.3.0",
     "ext-pdo": "*"
   }
 }

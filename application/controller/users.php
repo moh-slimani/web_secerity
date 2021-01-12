@@ -24,8 +24,9 @@ class Users extends Controller
     public function register()
     {
         $this->middleware('guest');
-        if (isset($this->post['submit'])) {
-            call_user_func_array(array($this->model, 'register'), $this->post);
+
+        if (isset($this->post->submit)) {
+            $this->model->register($this->post);
         }
 
         require APP . 'view/_templates/auth_header.php';
@@ -36,8 +37,9 @@ class Users extends Controller
     public function login()
     {
         $this->middleware('guest');
-        if (isset($this->post['submit'])) {
-            call_user_func_array(array($this->model, 'login'), $this->post);
+
+        if (isset($this->post->submit)) {
+            $this->model->login($this->post);
         }
 
         require APP . 'view/_templates/auth_header.php';

@@ -11,55 +11,56 @@ class User extends Model
      * @param string $password
      */
 
-    public function register($submit = false, $name = "", $email = "", $password = "")
+    public function register($data)
     {
-        if ($submit) {
 
-            $password = md5($password);
+        $password = md5($data->password);
 
-            if ($name == '' || $email == '' || $password == '') {
-                Messages::setMsg('Please Fill In All Fields', 'error');
-                return;
-            }
-
-            // Insert into MySQL
-            $this->query("INSERT INTO users (name, email, password) VALUES(:name, :email, :password)");
-            $this->bind(":name", $name);
-            $this->bind(":email", $email);
-            $this->bind(":password", $password);
-            $this->execute();
-            // Verify
-            if ($this->lastInsertId()) {
-                // Redirect
-                header("Location: " . URL . "users/login");
-            }
+        if ($data->name == '' || $data->email == '' || $password == '') {
+            Messages::setMsg('Please Fill In All Fields', 'error');
+            return;
         }
+
+        // Insert into MySQL
+        $this->query("INSERT INTO users (name, email, password) VALUES(:name, :email, :password)");
+        $this->bind(":name", $data->name);
+        $this->bind(":email", $data->email);
+        $this->bind(":password", $password);
+        $this->execute();
+        // Verify
+        if ($this->lastInsertId()) {
+            // Redirect
+            header("Location: " . URL . "users/login");
+        }
+
     }
 
-    public function login($submit = false, $email = "", $password = "")
+    public function login($data)
     {
-        if ($submit) {
-            $password = md5($password);
 
-            // Compare Login
-            $this->query("SELECT * FROM users WHERE email = :email AND password = :password");
-            $this->bind(":email", $email);
-            $this->bind(":password", $password);
+        $password = md5($data->password);
 
-            $row = $this->single();
+        // Compare Login
+        $this->query("SELECT * FROM users WHERE email = :email AND password = :password");
+        $this->bind(":email", $data->email);
+        $this->bind(":password", $password);
 
-            if ($row) {
-                $_SESSION["is_logged_in"] = true;
-                $_SESSION["user_data"] = array(
-                    "id" => $row->id,
-                    "name" => $row->name,
-                    "email" => $row->email
-                );
+        $row = $this->single();
 
-                header("Location: " . URL);
-            } else {
-                Messages::setMsg("Incorrect Login", "error");
-            }
+        if ($row) {
+            $_SESSION["is_logged_in"] = true;
+            $_SESSION["user_data"] = array(
+                "id" => $row->id,
+                "name" => $row->name,
+                "email" => $row->email
+            );
+
+            header("Location: " . URL);
+
+            Messages::setMsg('Welcome ' . $row->name);
+        } else {
+            Messages::setMsg("Incorrect Login", "error");
         }
+
     }
 }

@@ -17,7 +17,14 @@ abstract class Controller
     function __construct()
     {
         // Sanitize POST
-        $this->post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        if (is_array($post)) {
+            $this->post = new stdClass();
+            foreach ($post as $key => $value) {
+                $this->post->$key = $value;
+            }
+        }
     }
 
     /**
@@ -35,12 +42,12 @@ abstract class Controller
     {
         switch ($check) {
             case "auth":
-                if (!$_SESSION["is_logged_in"]) {
+                if (!isset($_SESSION["is_logged_in"])) {
                     header("Location: " . URL . "users/login");
                 }
                 break;
             case "guest":
-                if ($_SESSION["is_logged_in"]) {
+                if (isset($_SESSION["is_logged_in"])) {
                     header("Location: " . URL);
                 }
                 break;
