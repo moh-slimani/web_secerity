@@ -34,8 +34,9 @@ class Patients extends Controller
 
     public function create()
     {
+
         if (isset($this->post->submit)) {
-            $this->model->save($this->post);
+            $this->model->save($this->post, $this->files);
         }
 
         require APP . 'view/_templates/header.php';
@@ -54,7 +55,7 @@ class Patients extends Controller
         }
 
         if (isset($this->post->submit)) {
-            $this->model->update($id, $this->post);
+            $this->model->update($id, $this->post, $this->files);
         }
 
         require APP . 'view/_templates/header.php';
@@ -72,7 +73,7 @@ class Patients extends Controller
             $this->model->delete($id);
         }
 
-        Messages::setMsg('Patient Deleted' );
+        Messages::setMsg('Patient Deleted');
         header('Location:' . URL . 'patients');
 
     }

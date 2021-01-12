@@ -16,7 +16,7 @@ class Patient extends Model
         return $this->single();
     }
 
-    public function save($data)
+    public function save($data, $files)
     {
         $sql = "INSERT INTO patients (civility, last_name, first_name, sex, address) 
 VALUES (:civility, :last_name, :first_name, :sex, :address)";
@@ -33,8 +33,10 @@ VALUES (:civility, :last_name, :first_name, :sex, :address)";
         $id = $this->lastInsertId();
 
         if ($id) {
+            if (isset($files->picture) & file_exists($files->picture["tmp_name"]))
+                $this->uploadPicture($id, $files->picture);
+
             header('Location: ' . URL . 'patients');
-            Messages::setMsg('Patient Deleted' );
             return;
         }
 
@@ -45,8 +47,7 @@ VALUES (:civility, :last_name, :first_name, :sex, :address)";
         }
     }
 
-
-    public function update($id, $data)
+    public function update($id, $data, $files)
     {
         $sql = "UPDATE patients SET civility = :civility,
                     last_name = :last_name, 
@@ -70,13 +71,46 @@ VALUES (:civility, :last_name, :first_name, :sex, :address)";
         if ($sqlError[0] = !'00000') {
             Messages::setMsg($sqlError[2]);
         }
+
+        if (isset($files->picture) & file_exists($files->picture["tmp_name"]))
+            $this->uploadPicture($id, $files->picture);
+
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $this->query("DELETE  FROM patients WHERE id = :id");
         $this->bind(":id", $id);
         $this->execute();
 
     }
+
+    public function uploadPicture($id, $file)
+    {
+
+
+        $picture = Helper::uploadFile($file);
+
+        if (file_exists(ROOT . $picture)) {
+            $sql = "UPDATE patients SET picture = :picture WHERE id = :id";
+
+            $this->query($sql);
+
+            $this->bind(":id", $id);
+            $this->bind(":picture", $picture);
+
+            $this->execute();
+
+            $sqlError = $this->errorInfo();
+
+            if ($sqlError[0] = !'00000') {
+                Messages::setMsg($sqlError[2]);
+            }
+        } else {
+            Messages::setMsg("files was not uploaded", 'error');
+        }
+
+    }
+
 
 }

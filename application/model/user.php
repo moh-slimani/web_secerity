@@ -5,10 +5,7 @@ class User extends Model
     /**
      * Register a new user
      *
-     * @param bool $submit
-     * @param string $name
-     * @param string $email
-     * @param string $password
+     * @param $data
      */
 
     public function register($data)

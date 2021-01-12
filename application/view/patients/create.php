@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form method="post">
+                    <form method="post" enctype="multipart/form-data">
                         <div class="pl-lg-4">
                             <div class="row">
                                 <div class="col-lg-6">
@@ -71,6 +71,14 @@
                                         <label class="form-control-label" for="input-address">Address</label>
                                         <input id="input-address" class="form-control" placeholder="Home Address"
                                                name="address" type="text" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="custom-file">
+                                        <label class="custom-file-label" for="customFileLang">Select picture</label>
+                                        <input type="file" class="custom-file-input"
+                                               placeholder="Select a picture"
+                                               id="customFileLang" name="picture">
                                     </div>
                                 </div>
                             </div>

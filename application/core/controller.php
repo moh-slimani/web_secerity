@@ -12,6 +12,12 @@ abstract class Controller
     public $post = null;
 
     /**
+     * @var mixed
+     */
+    public $files = null;
+
+
+    /**
      * Whenever controller is created, open a database connection too and load "the model".
      */
     function __construct()
@@ -23,6 +29,15 @@ abstract class Controller
             $this->post = new stdClass();
             foreach ($post as $key => $value) {
                 $this->post->$key = $value;
+            }
+        }
+
+        $files = $_FILES;
+
+        if (is_array($files)) {
+            $this->files = new stdClass();
+            foreach ($files as $key => $value) {
+                $this->files->$key = $value;
             }
         }
     }

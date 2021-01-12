@@ -36,7 +36,7 @@
                 <!-- Nav items -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="<?php echo URL?>">
+                        <a class="nav-link" href="<?php echo URL?>">
                             <i class="ni ni-tv-2 text-primary"></i>
                             <span class="nav-link-text">Dashboard</span>
                         </a>
@@ -48,9 +48,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="examples/map.html">
-                            <i class="ni ni-pin-3 text-primary"></i>
-                            <span class="nav-link-text">Google</span>
+                        <a class="nav-link" href="<?php echo URL?>consultations">
+                            <i class="fas fa-notes-medical text-primary"></i>
+                            <span class="nav-link-text">Consultations</span>
                         </a>
                     </li>
                     <li class="nav-item">
