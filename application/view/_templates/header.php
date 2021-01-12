@@ -60,9 +60,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="examples/tables.html">
-                            <i class="ni ni-bullet-list-67 text-default"></i>
-                            <span class="nav-link-text">Tables</span>
+                        <a class="nav-link" href="<?php echo URL?>payments">
+                            <i class="fas fa-file-invoice-dollar text-pink"></i>
+                            <span class="nav-link-text">Payments</span>
                         </a>
                     </li>
                     <li class="nav-item">

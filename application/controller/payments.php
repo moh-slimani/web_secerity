@@ -1,21 +1,21 @@
 <?php
 
-class Consultations extends Controller
+class Payments extends Controller
 {
     public function __construct()
     {
         parent::__construct();
         $this->middleware();
-        $this->loadModel('consultation');
+        $this->loadModel('payment');
     }
 
 
     public function index()
     {
-        $consultations = $this->model->all();
+        $payments = $this->model->all();
 
         require APP . 'view/_templates/header.php';
-        require APP . 'view/consultation/index.php';
+        require APP . 'view/payments/index.php';
         require APP . 'view/_templates/footer.php';
     }
 
@@ -29,17 +29,17 @@ class Consultations extends Controller
         }
 
         require APP . 'view/_templates/header.php';
-        require APP . 'view/consultation/create.php';
+        require APP . 'view/payments/create.php';
         require APP . 'view/_templates/footer.php';
     }
 
     public function edit($id)
     {
         $patients = $this->model->patientsModel->all();
-        $consultation = $this->model->find($id);
+        $payment = $this->model->find($id);
 
-        if (!$consultation) {
-            header('Location:' . URL . 'consultation');
+        if (!$payment) {
+            header('Location:' . URL . 'payments');
             Messages::setMsg('Not Found', 'error');
             return;
         }
@@ -49,7 +49,7 @@ class Consultations extends Controller
         }
 
         require APP . 'view/_templates/header.php';
-        require APP . 'view/consultation/edit.php';
+        require APP . 'view/payments/edit.php';
         require APP . 'view/_templates/footer.php';
     }
 
@@ -63,7 +63,7 @@ class Consultations extends Controller
             $this->model->delete($id);
         }
 
-        header('Location:' . URL . 'consultation');
+        header('Location:' . URL . 'payments');
         Messages::setMsg('Consultation Deleted');
 
     }
