@@ -49,11 +49,11 @@ CREATE TABLE `results`
     `description` varchar(192),
     `value`       varchar(190) NOT NULL,
     `patient_id`  int          NOT NULL,
-    `analyses_id` int          NOT NULL,
+    `analysis_id` int          NOT NULL,
     PRIMARY KEY (`id`),
 
     FOREIGN KEY (`patient_id`) REFERENCES `patients` (`id`) ON DELETE CASCADE,
-    FOREIGN KEY (`analyses_id`) REFERENCES `analyses` (`id`) ON DELETE CASCADE
+    FOREIGN KEY (`analysis_id`) REFERENCES `analyses` (`id`) ON DELETE CASCADE
 );
 
 CREATE TABLE `payments`

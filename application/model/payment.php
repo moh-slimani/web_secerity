@@ -19,13 +19,13 @@ class Payment extends Model
     {
 
         $this->query("SELECT * FROM payments");
-        $consultations = $this->resultSet();
+        $payments = $this->resultSet();
 
-        foreach ($consultations as $consultation) {
-            $consultation->patient = $this->patientsModel->find($consultation->patient_id);
+        foreach ($payments as $payment) {
+            $payment->patient = $this->patientsModel->find($payment->patient_id);
         }
 
-        return $consultations;
+        return $payments;
     }
 
     public function find($id)

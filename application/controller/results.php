@@ -1,21 +1,21 @@
 <?php
 
-class Payments extends Controller
+class Results extends Controller
 {
     public function __construct()
     {
         parent::__construct();
         $this->middleware();
-        $this->loadModel('payment');
+        $this->loadModel('result');
     }
 
 
     public function index()
     {
-        $payments = $this->model->all();
+        $results = $this->model->all();
 
         require APP . 'view/_templates/header.php';
-        require APP . 'view/payments/index.php';
+        require APP . 'view/results/index.php';
         require APP . 'view/_templates/footer.php';
     }
 
@@ -23,23 +23,24 @@ class Payments extends Controller
     public function create()
     {
         $patients = $this->model->patientsModel->all();
+        $analyses = $this->model->analysesModel->all();
 
         if (isset($this->post->submit)) {
             $this->model->save($this->post);
         }
 
         require APP . 'view/_templates/header.php';
-        require APP . 'view/payments/create.php';
+        require APP . 'view/results/create.php';
         require APP . 'view/_templates/footer.php';
     }
 
     public function edit($id)
     {
         $patients = $this->model->patientsModel->all();
-        $payment = $this->model->find($id);
+        $result = $this->model->find($id);
 
-        if (!$payment) {
-            header('Location:' . URL . 'payments');
+        if (!$result) {
+            header('Location:' . URL . 'results');
             Messages::setMsg('Not Found', 'error');
             return;
         }
@@ -49,21 +50,21 @@ class Payments extends Controller
         }
 
         require APP . 'view/_templates/header.php';
-        require APP . 'view/payments/edit.php';
+        require APP . 'view/results/edit.php';
         require APP . 'view/_templates/footer.php';
     }
 
     public function delete($id)
     {
-        $payments = $this->model->find($id);
+        $results = $this->model->find($id);
 
-        if (!$payments) {
+        if (!$results) {
             Messages::setMsg('Not Found', 'error');
         } else {
             $this->model->delete($id);
         }
 
-        header('Location:' . URL . 'payments');
+        header('Location:' . URL . 'results');
         Messages::setMsg('Consultation Deleted');
 
     }
