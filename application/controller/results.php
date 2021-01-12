@@ -36,7 +36,9 @@ class Results extends Controller
 
     public function edit($id)
     {
+
         $patients = $this->model->patientsModel->all();
+        $analyses = $this->model->analysesModel->all();
         $result = $this->model->find($id);
 
         if (!$result) {
@@ -65,7 +67,7 @@ class Results extends Controller
         }
 
         header('Location:' . URL . 'results');
-        Messages::setMsg('Consultation Deleted');
+        Messages::setMsg('Deleted');
 
     }
 }

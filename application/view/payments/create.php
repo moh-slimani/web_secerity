@@ -35,8 +35,8 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label for="input-sex">Patient</label>
-                                        <select class="form-control" name="patient_id" id="input-sex" required>
+                                        <label for="input-patient_id">Patient</label>
+                                        <select class="form-control" name="patient_id" id="input-patient_id" required>
                                             <option selected disabled value="">Select a patient</option>
                                             <?php if (!empty($patients)) {
                                                 foreach ($patients as $patient) { ?>

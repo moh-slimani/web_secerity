@@ -9,7 +9,7 @@ class Analysis extends Model
      */
     public function __construct()
     {
-        require APP . 'model/patient.php';
+        require_once APP . 'model/patient.php';
         parent::__construct();
     }
 

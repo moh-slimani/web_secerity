@@ -62,7 +62,7 @@ class Analyses extends Controller
         }
 
         header('Location:' . URL . 'analyses');
-        Messages::setMsg('Consultation Deleted');
+        Messages::setMsg('Deleted');
 
     }
 }

@@ -23,12 +23,12 @@ CREATE TABLE `patients`
 CREATE TABLE `consultations`
 (
     `id`          int            NOT NULL AUTO_INCREMENT,
+    `patient_id`  int            NOT NULL,
     `type`        varchar(192)   NOT NULL,
-    `date`        date       NOT NULL,
+    `date`        date           NOT NULL,
     `appointment` date,
     `price`       decimal(10, 3) NOT NULL,
     `description` text,
-    `patient_id`  int            NOT NULL,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`patient_id`) REFERENCES `patients` (`id`) ON DELETE CASCADE
 );
@@ -46,10 +46,11 @@ CREATE TABLE `analyses`
 CREATE TABLE `results`
 (
     `id`          int          NOT NULL AUTO_INCREMENT,
-    `description` varchar(192),
-    `value`       varchar(190) NOT NULL,
     `patient_id`  int          NOT NULL,
     `analysis_id` int          NOT NULL,
+    `date`        DATE         NOT NULL,
+    `value`       varchar(190) NOT NULL,
+    `description` varchar(192),
     PRIMARY KEY (`id`),
 
     FOREIGN KEY (`patient_id`) REFERENCES `patients` (`id`) ON DELETE CASCADE,
@@ -59,11 +60,11 @@ CREATE TABLE `results`
 CREATE TABLE `payments`
 (
     `id`            int            NOT NULL AUTO_INCREMENT,
+    `patient_id`    int            NOT NULL,
     `date_received` datetime       NOT NULL,
     `total`         decimal(10, 3) NOT NULL,
     `amount`        decimal(10, 3) NOT NULL,
     `remainder`     decimal(10, 3) NOT NULL,
-    `patient_id`    int            NOT NULL,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`patient_id`) REFERENCES `patients` (`id`) ON DELETE CASCADE
 );

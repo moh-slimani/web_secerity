@@ -64,7 +64,7 @@ class Payments extends Controller
         }
 
         header('Location:' . URL . 'payments');
-        Messages::setMsg('Consultation Deleted');
+        Messages::setMsg('Deleted');
 
     }
 }

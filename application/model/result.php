@@ -10,8 +10,8 @@ class Result extends Model
      */
     public function __construct()
     {
-        require APP . 'model/patient.php';
-        require APP . 'model/analysis.php';
+        require_once APP . 'model/patient.php';
+        require_once APP . 'model/analysis.php';
 
         parent::__construct();
         $this->patientsModel = new Patient();
@@ -42,11 +42,12 @@ class Result extends Model
 
     public function save($data)
     {
-        $sql = "INSERT INTO results (description, value, patient_id, analysis_id) 
-            VALUES (:description, :value, :patient_id, :analysis_id)";
+        $sql = "INSERT INTO results (description, date, value, patient_id, analysis_id) 
+            VALUES (:description,:date, :value, :patient_id, :analysis_id)";
         $this->query($sql);
 
         $this->bind(":description", $data->description);
+        $this->bind(":date", $data->date);
         $this->bind(":value", $data->value);
         $this->bind(":analysis_id", $data->analysis_id);
         $this->bind(":patient_id", $data->patient_id);

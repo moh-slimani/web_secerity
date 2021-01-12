@@ -35,8 +35,8 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label for="input-sex">Patient</label>
-                                        <select class="form-control" name="patient_id" id="input-sex" required>
+                                        <label for="input-patient_id">Patient</label>
+                                        <select class="form-control" name="patient_id" id="input-patient_id" required>
                                             <option selected disabled value="">Select a patient</option>
                                             <?php if (!empty($patients)) {
                                                 foreach ($patients as $patient) { ?>
@@ -51,8 +51,23 @@
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
+                                        <label for="input-analysis_id">Analysis</label>
+                                        <select class="form-control" name="analysis_id" id="input-analysis_id" required>
+                                            <option selected disabled value="">Select a Analysis</option>
+                                            <?php if (!empty($analyses)) {
+                                                foreach ($analyses as $analysis) { ?>
+                                                    <option value="<?php echo $analysis->id ?>">
+                                                        <?php echo $analysis->designation ?>
+                                                    </option>
+                                                <?php }
+                                            } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
                                         <label class="form-control-label" for="input-date">Date</label>
-                                        <input type="text" id="input-date" name="date_received"
+                                        <input type="text" id="input-date" name="date"
                                                class="form-control datepicker"
                                                value="<?php echo date('Y-m-d') ?>"
                                                placeholder="Date" required>
@@ -60,29 +75,18 @@
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="input-total">Total</label>
-                                        <input type="number" id="input-total" name="total"
+                                        <label class="form-control-label" for="input-value">Value</label>
+                                        <input type="text" id="input-value" name="value"
                                                class="form-control"
-                                               value="0"
-                                               placeholder="total" required>
+                                               placeholder="value" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="input-amount">Amount</label>
-                                        <input type="number" id="input-amount" name="amount"
-                                               class="form-control"
-                                               value="0"
-                                               placeholder="amount" required>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="input-remainder">Remainder</label>
-                                        <input type="number" id="input-remainder" name="remainder"
-                                               class="form-control"
-                                               value="0"
-                                               placeholder="remainder" required>
+                                        <label for="input-description">Description</label>
+                                        <textarea class="form-control" id="input-description"
+                                                  name="description"
+                                                  rows="3"></textarea>
                                     </div>
                                 </div>
                             </div>

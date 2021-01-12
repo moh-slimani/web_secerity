@@ -4,11 +4,11 @@
         <div class="header-body">
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-7">
-                    <h6 class="h2 text-white d-inline-block mb-0">Payments</h6>
+                    <h6 class="h2 text-white d-inline-block mb-0">Results</h6>
                     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                             <li class="breadcrumb-item"><a href="<?php echo URL ?>"><i class="fas fa-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="<?php echo URL ?>payments">Payments</a></li>
+                            <li class="breadcrumb-item"><a href="<?php echo URL ?>payments">Results</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Edit</li>
                         </ol>
                     </nav>
@@ -25,9 +25,7 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col-8">
-                            <h3 class="mb-0">Edit Payment #<?php if (isset($payment)) {
-                                    echo $payment->id;
-                                } ?></h3>
+                            <h3 class="mb-0">Edit Results #<?php echo isset($result) ? $result->id : '' ?></h3>
                         </div>
                     </div>
                 </div>
@@ -37,14 +35,13 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label for="input-sex">Patient</label>
-                                        <select class="form-control" name="patient_id" id="input-sex" required>
-                                            <option selected disabled value="">Select a patient</option>
+                                        <label for="input-patient_id">Patient</label>
+                                        <select class="form-control" name="patient_id" id="input-patient_id" required>
+                                            <option disabled value="">Select a patient</option>
                                             <?php if (!empty($patients)) {
                                                 foreach ($patients as $patient) { ?>
                                                     <option value="<?php echo $patient->id ?>"
-                                                        <?php echo $patient->id == $payment->patient_id ? 'selected' : '' ?>
-                                                    >
+                                                        <?php echo $patient->id == $result->patient_id ? 'selected' : '' ?>>
                                                         <?php echo $patient->first_name ?>
                                                         <?php echo $patient->last_name ?>
                                                     </option>
@@ -55,38 +52,44 @@
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
+                                        <label for="input-analysis_id">Analysis</label>
+                                        <select class="form-control" name="analysis_id" id="input-analysis_id" required>
+                                            <option disabled value="">Select a Analysis</option>
+                                            <?php if (!empty($analyses)) {
+                                                foreach ($analyses as $analysis) { ?>
+                                                    <option value="<?php echo $analysis->id ?>"
+                                                        <?php echo $patient->id == $result->analysis_id ? 'selected' : '' ?>>
+                                                        <?php echo $analysis->designation ?>
+                                                    </option>
+                                                <?php }
+                                            } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
                                         <label class="form-control-label" for="input-date">Date</label>
-                                        <input type="text" id="input-date" name="date_received"
+                                        <input type="text" id="input-date" name="date"
                                                class="form-control datepicker"
-                                               value="<?php echo $payment->date_received ?>"
+                                               value="<?php echo $result->date ?>"
                                                placeholder="Date" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="input-total">Total</label>
-                                        <input type="number" id="input-total" name="total"
+                                        <label class="form-control-label" for="input-value">Value</label>
+                                        <input type="text" id="input-value" name="value"
                                                class="form-control"
-                                               value="<?php echo $payment->total ?>"
-                                               placeholder="total" required>
+                                               value="<?php echo $result->value ?>"
+                                               placeholder="value" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="input-amount">Amount</label>
-                                        <input type="number" id="input-amount" name="amount"
-                                               class="form-control"
-                                               value="<?php echo $payment->amount ?>"
-                                               placeholder="amount" required>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="input-remainder">Remainder</label>
-                                        <input type="number" id="input-remainder" name="remainder"
-                                               class="form-control"
-                                               value="<?php echo $payment->remainder ?>"
-                                               placeholder="remainder" required>
+                                        <label for="input-description">Description</label>
+                                        <textarea class="form-control" id="input-description"
+                                                  name="description"
+                                                  rows="3"><?php echo $result->description ?></textarea>
                                     </div>
                                 </div>
                             </div>

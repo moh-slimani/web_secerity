@@ -4,16 +4,16 @@
         <div class="header-body">
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-7">
-                    <h6 class="h2 text-white d-inline-block mb-0">Results</h6>
+                    <h6 class="h2 text-white d-inline-block mb-0">Payments</h6>
                     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                         <ol class="breadcrumb breadcrumb-links breadcrumb-dark  mb-0">
                             <li class="breadcrumb-item"><a href="<?php echo URL ?>"><i class="fas fa-home"></i></a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Results</li>
+                            <li class="breadcrumb-item active" aria-current="page">Payments</li>
                         </ol>
                     </nav>
                 </div>
                 <div class="col-lg-6 col-5 text-right">
-                    <a href="<?php echo URL ?>results/create" class="btn btn-neutral">New</a>
+                    <a href="<?php echo URL ?>payments/create" class="btn btn-neutral">New</a>
                 </div>
             </div>
         </div>
@@ -26,7 +26,7 @@
             <div class="card">
                 <!-- Card header -->
                 <div class="card-header border-0">
-                    <h3 class="mb-0">Results list</h3>
+                    <h3 class="mb-0">Payments list</h3>
                 </div>
                 <!-- Light table -->
                 <div class="table-responsive">
@@ -34,29 +34,32 @@
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col">Patient</th>
-                                <th scope="col">analysis</th>
-                                <th scope="col">value</th>
-                                <th scope="col">norm</th>
+                                <th scope="col">date</th>
+                                <th scope="col">total</th>
+                                <th scope="col">amount</th>
+                                <th scope="col">reminder</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody class="list">
-                            <?php if (isset($results)) {
-                                foreach ($results as $result) {?>
+                            <?php if (isset($payments)) {
+                                foreach ($payments as $payment) {?>
                                     <tr>
                                         <td>
-                                            <?php echo $result->patient->last_name ?>
-                                            <?php echo $result->patient->first_name ?>
+                                            <?php echo $payment->patient->last_name ?>
+                                            <?php echo $payment->patient->first_name ?>
                                         </td>
                                         <td>
-                                            <?php echo $result->analysis->designation ?>
+                                            <?php echo $payment->date_received ?>
                                         </td>
                                         <td>
-                                            <?php echo $result->analysis->min_value ?> /
-                                            <?php echo $result->analysis->max_value ?>
+                                            <?php echo strtoupper($payment->total) ?>
                                         </td>
                                         <td>
-                                            <?php echo strtoupper($result->value) ?>
+                                            <?php echo $payment->amount ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $payment->remainder ?>
                                         </td>
                                         <td class="text-right">
                                             <div class="dropdown">
@@ -64,8 +67,8 @@
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                    <a class="dropdown-item" href="<?php echo URL.'results/edit/'.$result->id ?>">Edit</a>
-                                                    <a class="dropdown-item" href="<?php echo URL.'results/delete/'.$result->id ?>">Delete</a>
+                                                    <a class="dropdown-item" href="<?php echo URL.'payments/edit/'.$payment->id ?>">Edit</a>
+                                                    <a class="dropdown-item" href="<?php echo URL.'payments/delete/'.$payment->id ?>">Delete</a>
                                                 </div>
                                             </div>
                                         </td>

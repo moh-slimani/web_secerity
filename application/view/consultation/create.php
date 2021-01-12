@@ -70,18 +70,20 @@
                                         <label for="input-sex">Patient</label>
                                         <select class="form-control" name="patient_id" id="input-sex" required>
                                             <option selected disabled value="">Select a patient</option>
-                                            <?php foreach ($patients as $patient) { ?>
-                                                <option value="<?php echo $patient->id ?>">
-                                                    <?php echo $patient->first_name ?>
-                                                    <?php echo $patient->last_name ?>
-                                                </option>
-                                            <?php } ?>
+                                            <?php if (isset($patients)) {
+                                                foreach ($patients as $patient) { ?>
+                                                    <option value="<?php echo $patient->id ?>">
+                                                        <?php echo $patient->first_name ?>
+                                                        <?php echo $patient->last_name ?>
+                                                    </option>
+                                                <?php }
+                                            } ?>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label for="input-description">Descirption</label>
+                                        <label for="input-description">Description</label>
                                         <textarea class="form-control" id="input-description"
                                                   name="description"
                                                   rows="3"></textarea>
