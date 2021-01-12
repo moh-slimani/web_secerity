@@ -54,9 +54,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="examples/profile.html">
-                            <i class="ni ni-single-02 text-yellow"></i>
-                            <span class="nav-link-text">Profile</span>
+                        <a class="nav-link" href="<?php echo URL?>analyses">
+                            <i class="fas fa-vial text-yellow"></i>
+                            <span class="nav-link-text">Analyses</span>
                         </a>
                     </li>
                     <li class="nav-item">

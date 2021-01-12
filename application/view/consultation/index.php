@@ -4,16 +4,16 @@
         <div class="header-body">
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-7">
-                    <h6 class="h2 text-white d-inline-block mb-0">Patients</h6>
+                    <h6 class="h2 text-white d-inline-block mb-0">Consultations</h6>
                     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                         <ol class="breadcrumb breadcrumb-links breadcrumb-dark  mb-0">
                             <li class="breadcrumb-item"><a href="<?php echo URL ?>"><i class="fas fa-home"></i></a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Patients</li>
+                            <li class="breadcrumb-item active" aria-current="page">Consultations</li>
                         </ol>
                     </nav>
                 </div>
                 <div class="col-lg-6 col-5 text-right">
-                    <a href="<?php echo URL ?>patients/create" class="btn btn-neutral">New</a>
+                    <a href="<?php echo URL ?>consultations/create" class="btn btn-neutral">New</a>
                 </div>
             </div>
         </div>
@@ -26,45 +26,40 @@
             <div class="card">
                 <!-- Card header -->
                 <div class="card-header border-0">
-                    <h3 class="mb-0">Patients list</h3>
+                    <h3 class="mb-0">Consultations list</h3>
                 </div>
                 <!-- Light table -->
                 <div class="table-responsive">
                     <table class="table align-items-center table-flush">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col">Full Name</th>
-                                <th scope="col">Sex</th>
-                                <th scope="col">Address</th>
-                                <th scope="col">Civility</th>
+                                <th scope="col">Patient</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Appointment</th>
+                                <th scope="col">Price</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody class="list">
-                            <?php if (isset($patients)) {
-                                foreach ($patients as $patient) {?>
+                            <?php if (isset($consultations)) {
+                                foreach ($consultations as $consultation) {?>
                                     <tr>
-                                        <th scope="row">
-                                            <div class="media align-items-center">
-                                                <a href="#" class="avatar rounded-circle mr-3">
-                                                    <img alt="Image placeholder" src=<?php echo $patient->picture ?  URL . $patient->picture : URL . 'img/placeholder-profile.png' ?>>
-                                                </a>
-                                                <div class="media-body">
-                                                    <span class="name mb-0 text-sm">
-                                                        <?php echo $patient->last_name ?>
-                                                        <?php echo $patient->first_name ?>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </th>
                                         <td>
-                                            <?php echo strtoupper($patient->sex) ?>
+                                            <?php echo $consultation->patient->last_name ?>
+                                            <?php echo $consultation->patient->first_name ?>
                                         </td>
                                         <td>
-                                            <?php echo $patient->address ?>
+                                            <?php echo $consultation->type ?>
                                         </td>
                                         <td>
-                                            <?php echo $patient->civility ?>
+                                            <?php echo strtoupper($consultation->date) ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $consultation->appointment ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $consultation->price ?>
                                         </td>
                                         <td class="text-right">
                                             <div class="dropdown">
@@ -72,8 +67,8 @@
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                    <a class="dropdown-item" href="<?php echo URL.'patients/edit/'.$patient->id ?>">Edit</a>
-                                                    <a class="dropdown-item" href="<?php echo URL.'patients/delete/'.$patient->id ?>">Delete</a>
+                                                    <a class="dropdown-item" href="<?php echo URL.'consultations/edit/'.$consultation->id ?>">Edit</a>
+                                                    <a class="dropdown-item" href="<?php echo URL.'consultations/delete/'.$consultation->id ?>">Delete</a>
                                                 </div>
                                             </div>
                                         </td>

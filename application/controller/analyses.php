@@ -1,21 +1,21 @@
 <?php
 
-class Patients extends Controller
+class Analyses extends Controller
 {
     public function __construct()
     {
         parent::__construct();
         $this->middleware();
-        $this->loadModel('patient');
+        $this->loadModel('analysis');
     }
 
 
     public function index()
     {
-        $patients = $this->model->all();
+        $analyses = $this->model->all();
 
         require APP . 'view/_templates/header.php';
-        require APP . 'view/patients/index.php';
+        require APP . 'view/analyses/index.php';
         require APP . 'view/_templates/footer.php';
     }
 
@@ -24,45 +24,45 @@ class Patients extends Controller
     {
 
         if (isset($this->post->submit)) {
-            $this->model->save($this->post, $this->files);
+            $this->model->save($this->post);
         }
 
         require APP . 'view/_templates/header.php';
-        require APP . 'view/patients/create.php';
+        require APP . 'view/analyses/create.php';
         require APP . 'view/_templates/footer.php';
     }
 
     public function edit($id)
     {
-        $patient = $this->model->find($id);
+        $analysis = $this->model->find($id);
 
-        if (!$patient) {
-            header('Location:' . URL . 'patients');
+        if (!$analysis) {
+            header('Location:' . URL . 'analyses');
             Messages::setMsg('Not Found', 'error');
             return;
         }
 
         if (isset($this->post->submit)) {
-            $this->model->update($id, $this->post, $this->files);
+            $this->model->update($id, $this->post);
         }
 
         require APP . 'view/_templates/header.php';
-        require APP . 'view/patients/edit.php';
+        require APP . 'view/analyses/edit.php';
         require APP . 'view/_templates/footer.php';
     }
 
     public function delete($id)
     {
-        $patient = $this->model->find($id);
+        $analysis = $this->model->find($id);
 
-        if (!$patient) {
+        if (!$analysis) {
             Messages::setMsg('Not Found', 'error');
         } else {
             $this->model->delete($id);
         }
 
-        header('Location:' . URL . 'patients');
-        Messages::setMsg('Patient Deleted');
+        header('Location:' . URL . 'analyses');
+        Messages::setMsg('Consultation Deleted');
 
     }
 }

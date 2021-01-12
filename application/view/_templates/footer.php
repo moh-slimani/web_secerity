@@ -9,6 +9,7 @@
 <script src="<?php echo URL; ?>vendor/chart.js/dist/Chart.min.js"></script>
 <script src="<?php echo URL; ?>vendor/chart.js/dist/Chart.extension.js"></script>
 <script src="<?php echo URL; ?>vendor/bootstrap-notify/bootstrap-notify.min.js"></script>
+<script src="<?php echo URL; ?>vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- Argon JS -->
 <script src="<?php echo URL; ?>js/argon.js?v=1.2.0"></script>
 

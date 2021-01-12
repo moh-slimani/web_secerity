@@ -37,7 +37,7 @@ VALUES (:civility, :last_name, :first_name, :sex, :address)";
                 $this->uploadPicture($id, $files->picture);
 
             header('Location: ' . URL . 'patients');
-            return;
+            Messages::setMsg('Patient Updated');
         }
 
         $sqlError = $this->errorInfo();
@@ -70,10 +70,14 @@ VALUES (:civility, :last_name, :first_name, :sex, :address)";
 
         if ($sqlError[0] = !'00000') {
             Messages::setMsg($sqlError[2]);
+            return;
         }
 
         if (isset($files->picture) & file_exists($files->picture["tmp_name"]))
             $this->uploadPicture($id, $files->picture);
+
+        header('Location: ' . URL . 'patients');
+        Messages::setMsg('Patient Created');
 
     }
 
