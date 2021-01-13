@@ -1,5 +1,3 @@
-use tp_web_1;
-
 DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `consultations`;
 DROP TABLE IF EXISTS `payments`;
