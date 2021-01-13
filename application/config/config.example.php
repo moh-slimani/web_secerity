@@ -2,7 +2,7 @@
 
 /**
  * Configuration
- *
+ * Copy To config.php and change the informations
  * For more info about constants please @see http://php.net/manual/en/function.define.php
  */
 
