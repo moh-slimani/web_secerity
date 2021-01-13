@@ -1,4 +1,4 @@
-vendor/
-.idea/
-public/uploads/
+vendor/**
+.idea/**
+public/uploads/**
 application/config/config.php
