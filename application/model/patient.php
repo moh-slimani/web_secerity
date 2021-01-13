@@ -95,7 +95,7 @@ VALUES (:civility, :last_name, :first_name, :sex, :address)";
 
         $picture = Helper::uploadFile($file);
 
-        if (file_exists(ROOT . $picture)) {
+        if (file_exists(ROOT . 'public/' . $picture)) {
             $sql = "UPDATE patients SET picture = :picture WHERE id = :id";
 
             $this->query($sql);

@@ -55,12 +55,13 @@ class Helper
 
     static public function uploadFile($file): string
     {
-        $target_dir = ROOT;
-        $fileType = strtolower(pathinfo($file["tmp_name"], PATHINFO_EXTENSION));
-        $target_relative_path = "public/uploads/" . uniqid(substr(basename($file["name"]), 1, 30)) . $fileType;
+        $target_dir = ROOT . 'public/';
+        $fileType = pathinfo($file["name"], PATHINFO_EXTENSION);
+        $file_name = explode('.', basename($file["name"]))[0];
+        $target_relative_path = "uploads/" . uniqid() . substr($file_name, 0, 30) . '.' . $fileType;
         $target_file = $target_dir . $target_relative_path;
 
-        $check =  getimagesize($file["tmp_name"]);
+        $check = getimagesize($file["tmp_name"]);
         if ($check !== false) {
             // echo "File is an image - " . $check["mime"] . ".";
             $uploadOk = 1;
