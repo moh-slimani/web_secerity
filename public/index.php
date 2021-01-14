@@ -38,14 +38,17 @@ require APP . 'core/messages.php';
 
 session_start();
 
-if (!empty($_COOKIE['user_id']) && !empty($_COOKIE["user_token"])) {
+if (!empty($_COOKIE['user_email']) && !empty($_COOKIE["user_token"])) {
     require_once APP . 'model/user.php';
     $auth = new User();
     $data = new stdClass();
-    $data->id = $_COOKIE['user_id'];
+    $data->email = $_COOKIE['user_email'];
     $data->token = $_COOKIE['user_token'];
     $auth->tokenLogin($data);
 }
 
 // start the application
+
 $app = new Application();
+
+

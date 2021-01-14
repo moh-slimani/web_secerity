@@ -69,10 +69,11 @@ CREATE TABLE `payments`
 
 CREATE TABLE `users`
 (
-    `id`       int          NOT NULL AUTO_INCREMENT,
-    `name`     varchar(190) NOT NULL unique,
-    `email`    varchar(190) NOT NULL,
-    `password` varchar(190) NOT NULL,
-    'token'    varchar(190),
+    `id`             int          NOT NULL AUTO_INCREMENT,
+    `name`           varchar(190) NOT NULL unique,
+    `email`          varchar(190) NOT NULL unique,
+    `password`       varchar(190) NOT NULL,
+    'token'          varchar(190),
+    'password_token' varchar(190),
     PRIMARY KEY (`id`)
 );

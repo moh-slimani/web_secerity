@@ -1,5 +1,13 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+
+require APP . 'libs/PHPMailer/src/Exception.php';
+require APP . 'libs/PHPMailer/src/PHPMailer.php';
+require APP . 'libs/PHPMailer/src/SMTP.php';
+
 class Helper
 {
     /**
@@ -96,4 +104,34 @@ class Helper
         return openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
     }
 
+    public static function sendMail($email, $name, $subject, $body, $isHtml = false, $altBody = null)
+    {
+        $mail = new PHPMailer(true);
+        try {
+            //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+            $mail->isSMTP();
+            $mail->Host = MAIL_HOST;
+            $mail->SMTPAuth = true;
+            $mail->Username = MAIL_USER;
+            $mail->Password = MAIL_PASS;
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            $mail->Port = MAIL_PORT;
+
+            $mail->setFrom(MAIL_USER, MAIL_NAME);
+            $mail->addAddress($email, $name);
+
+            $mail->isHTML($isHtml);
+            $mail->Subject = $subject;
+            $mail->Body = $body;
+
+            if ($altBody) {
+                $mail->AltBody = $altBody;
+            }
+
+            $mail->send();
+            Messages::setMsg('An Email was sent to : ' . $email);
+        } catch (Exception $e) {
+            Messages::setMsg("Message could not be sent. Mailer Error: {$mail->ErrorInfo}", 'error');
+        }
+    }
 }

@@ -61,7 +61,7 @@ class User extends Model
 
                 $this->execute();
 
-                setcookie('user_id', $user->id, time() + 60 * 60 * 24 * 30);
+                setcookie('user_email', $user->email, time() + 60 * 60 * 24 * 30);
                 setcookie('user_token', $token, time() + 60 * 60 * 24 * 30);
             }
 
@@ -75,15 +75,15 @@ class User extends Model
 
     public function logout($id)
     {
-        $this->query("UPDATE users SET token = :token WHERE id = :id");
-        $this->bind(':id,', $id);
+        $this->query("UPDATE users SET token = :token WHERE email = :email");
+        $this->bind(':email,', $id);
         $this->bind(':token,', null);
 
         unset($_SESSION['is_logged_in']);
         unset($_SESSION['user_data']);
         session_destroy();
 
-        setcookie('user_id', "");
+        setcookie('user_email', "");
         setcookie('user_token', "");
     }
 
@@ -92,8 +92,8 @@ class User extends Model
         $token = md5($data->token);
 
         // Compare Login
-        $this->query("SELECT * FROM users WHERE id = :id AND token = :token");
-        $this->bind(":id", $data->id);
+        $this->query("SELECT * FROM users WHERE email = :email AND token = :token");
+        $this->bind(":email", $data->email);
         $this->bind(":token", $token);
 
         $user = $this->single();
@@ -108,8 +108,49 @@ class User extends Model
 
             header("Location:" . URL);
         } else {
-            setcookie('user_id', "");
+            setcookie('user_email', "");
             setcookie('user_token', "");
         }
+    }
+
+    public function sendPasswordRecoverToken($data)
+    {
+        $password_token = bin2hex(openssl_random_pseudo_bytes(32));
+
+        $this->query("UPDATE users SET password_token = :password_token WHERE email = :email");
+        $this->bind(':email', $data->email);
+        $this->bind(':password_token', md5($password_token));
+
+        $this->execute();
+
+        require APP . 'libs/password_recover_email.php';
+
+        $emailBody = PasswordRecoverEmail::generateEmail($data->email, $password_token);
+        $altBody = 'please open this link to recover your email ' . 'http' . URL . 'users/recover_password?email=' . $data->email . '&token=' . $password_token;
+
+        Helper::sendMail($data->email, $data->name, 'Password Recover', $emailBody, true, $altBody);
+    }
+
+    public function change_password($data)
+    {
+        $this->query('SELECT * from users WHERE password_token = :password_token AND email = :email');
+        $this->bind(':email', $data->email);
+        $this->bind(':password_token', md5($data->token));
+
+        $user = $this->single();
+
+        if ($user) {
+            $this->query("UPDATE users SET password = :password, password_token = null WHERE password_token = :password_token AND email = :email");
+            $this->bind(':password', md5($data->password));
+            $this->bind(':email', $data->email);
+            $this->bind(':password_token', md5($data->token));
+
+            $this->execute();
+
+            header("Location: " . URL . "users/login");
+        } else {
+            Messages::setMsg('Invalid Token', 'error');
+        }
+
     }
 }

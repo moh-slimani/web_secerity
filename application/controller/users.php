@@ -47,6 +47,32 @@ class Users extends Controller
         require APP . 'view/_templates/auth_footer.php';
     }
 
+    public function send_email()
+    {
+        $this->middleware('guest');
+
+        if (isset($this->post->submit)) {
+            $this->model->sendPasswordRecoverToken($this->post);
+        }
+
+        require APP . 'view/_templates/auth_header.php';
+        require APP . 'view/users/send_email.php';
+        require APP . 'view/_templates/auth_footer.php';
+    }
+
+    public function recover_password()
+    {
+        $this->middleware('guest');
+
+        if (isset($this->post->submit)) {
+            $this->model->change_password($this->post);
+        }
+
+        require APP . 'view/_templates/auth_header.php';
+        require APP . 'view/users/recover_password.php';
+        require APP . 'view/_templates/auth_footer.php';
+    }
+
     public function logout()
     {
         $id = $_SESSION['user_data']['id'];
