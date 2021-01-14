@@ -62,3 +62,10 @@ define('DB_CHARSET', 'utf8');
 
 define('SECRET', '4TXL0MD7C532BSJBF4XGS0JBVPNB7A');
 define('IV', '000000');
+
+//smtp info
+define('MAIL_HOST', 'smtp.gmail.com');
+define('MAIL_PORT', 465);
+define('MAIL_USER', 'sweb2751@gmail.com');
+define('MAIL_PASS', 'pBTZgyoSKLlKyQXZeYnrFlSlXscplijumYgjVLpLZhpyJLgGpx');
+define('MAIL_NAME', 'Mohamed Slimani');
