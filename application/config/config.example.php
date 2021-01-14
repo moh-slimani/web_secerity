@@ -58,3 +58,7 @@ define('DB_NAME', 'web_security');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_CHARSET', 'utf8');
+
+
+define('SECRET', '4TXL0MD7C532BSJBF4XGS0JBVPNB7A');
+define('IV', '000000');

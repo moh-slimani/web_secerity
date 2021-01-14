@@ -27,8 +27,8 @@
                             </div>
                         </div>
                         <div class="custom-control custom-control-alternative custom-checkbox">
-                            <input class="custom-control-input" name="remember_me" id="customCheckLogin" type="checkbox">
-                            <label class="custom-control-label" for="customCheckLogin">
+                            <input class="custom-control-input" name="remember_me" id="input-remember_me" type="checkbox">
+                            <label class="custom-control-label" for="input-remember_me">
                                 <span class="text-muted">Remember me</span>
                             </label>
                         </div>

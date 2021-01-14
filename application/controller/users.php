@@ -49,9 +49,8 @@ class Users extends Controller
 
     public function logout()
     {
-        unset($_SESSION['is_logged_in']);
-        unset($_SESSION['user_data']);
-        session_destroy();
+        $id = $_SESSION['user_data']['id'];
+        $this->model->logout($id);
         // Redirect
         header('Location: ' . URL);
     }

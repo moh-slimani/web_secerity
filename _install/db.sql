@@ -73,5 +73,6 @@ CREATE TABLE `users`
     `name`     varchar(190) NOT NULL unique,
     `email`    varchar(190) NOT NULL,
     `password` varchar(190) NOT NULL,
+    'token'    varchar(190),
     PRIMARY KEY (`id`)
 );

@@ -49,7 +49,7 @@ abstract class Controller
     public function loadModel($model)
     {
         /** @noinspection PhpIncludeInspection */
-        require APP . 'model/' . $model . '.php';
+        require_once APP . 'model/' . $model . '.php';
         $this->model = new $model();
     }
 
